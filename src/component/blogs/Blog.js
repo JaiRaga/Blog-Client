@@ -1,11 +1,23 @@
 import React from "react";
-import { Grid, Typography, IconButton, Tooltip } from "@material-ui/core";
+import {
+  Grid,
+  Typography,
+  IconButton,
+  Tooltip,
+  Divider
+} from "@material-ui/core";
 import GetAppIcon from "@material-ui/icons/GetApp";
 import CheckIcon from "@material-ui/icons/Check";
 import VisibilityIcon from "@material-ui/icons/Visibility";
 import { makeStyles } from "@material-ui/styles";
+import Comments from "../comments/Comments";
 
 const useStyles = makeStyles((theme) => ({
+  divider: {
+    width: "100%",
+    marginTop: 20,
+    backgroundColor: "#ea907a"
+  },
   paddingVerified: {
     paddingRight: 3
   },
@@ -17,6 +29,12 @@ const useStyles = makeStyles((theme) => ({
   },
   background: {
     backgroundColor: theme.palette.background.default
+  },
+  comments: {
+    marginTop: 25
+  },
+  commentTitle: {
+    marginLeft: 10
   }
 }));
 
@@ -173,6 +191,13 @@ const Blog = () => {
         amet expedita quae distinctio earum vitae, vel impedit cum maiores
         natus, placeat id perspiciatis nostrum in odit minima officia corrupti.
         Veniam provident a minima reprehenderit ratione aliquid dignissimos!
+      </Grid>
+      <Divider className={classes.divider} />
+      <Grid item className={classes.comments}>
+        <Typography variant='h3' className={classes.commentTitle}>
+          Comments
+        </Typography>
+        <Comments />
       </Grid>
     </Grid>
   );
