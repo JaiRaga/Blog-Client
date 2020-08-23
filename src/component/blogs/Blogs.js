@@ -1,7 +1,67 @@
-import React from "react";
+import React, { Fragment } from "react";
+import { Grid, makeStyles, Typography, Divider } from "@material-ui/core";
+import BlogItem from "./BlogItem";
+import TrendingBlogs from "../trending/TrendingBlogs";
+
+const useStyles = makeStyles((theme) => ({
+  root: {
+    flexGrow: 1
+  },
+  blogs: {
+    padding: 10,
+    marginRight: 10
+  },
+  trendings: {
+    margin: 5,
+    padding: 5
+  },
+  trendingTitle: {
+    margin: 10
+  },
+  divider: {
+    margin: 5
+  }
+}));
 
 const Blogs = () => {
-  return;
+  const classes = useStyles();
+  return (
+    <Grid container className={classes.root} justify='flex-end'>
+      <Grid item xs={6} className={classes.blogs}>
+        <Grid container item justify='center' alignItems='center'>
+          <Grid item>
+            <BlogItem className={classes.blog} />
+            <Divider className={classes.divider} />
+            <BlogItem className={classes.blog} />
+            <Divider className={classes.divider} />
+            <BlogItem className={classes.blog} />
+            <Divider className={classes.divider} />
+            <BlogItem className={classes.blog} />
+            <Divider className={classes.divider} />
+            <BlogItem className={classes.blog} />
+            <Divider className={classes.divider} />
+            <BlogItem className={classes.blog} />
+            <Divider className={classes.divider} />
+            <BlogItem className={classes.blog} />
+            <Divider className={classes.divider} />
+          </Grid>
+        </Grid>
+      </Grid>
+      <Grid item xs={3} className={classes.trendings}>
+        <Grid container item>
+          <Grid item>
+            <Typography
+              variant='h4'
+              align='center'
+              className={classes.trendingTitle}>
+              Trending
+            </Typography>
+            <TrendingBlogs className={classes.trending} />
+          </Grid>
+        </Grid>
+      </Grid>
+    </Grid>
+  );
 };
 
 export default Blogs;
