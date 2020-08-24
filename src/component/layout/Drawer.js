@@ -16,14 +16,16 @@ import PersonIcon from "@material-ui/icons/Person";
 import HomeIcon from "@material-ui/icons/Home";
 import PersonPinIcon from "@material-ui/icons/PersonPin";
 import DirectionsRunIcon from "@material-ui/icons/DirectionsRun";
+import TrendingUpIcon from "@material-ui/icons/TrendingUp";
 import { Link, Redirect } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
+import TrendingSideBar from "../trending/TrendingSideBar";
 
 // import SideProfile from "../profile/SideProfile";
 
 const useStyles = makeStyles((theme) => ({
   list: {
-    width: 300
+    width: "auto"
   },
   display: {
     [theme.breakpoints.down("md")]: {
@@ -48,6 +50,10 @@ const useStyles = makeStyles((theme) => ({
   },
   hamburger: {
     color: "white"
+  },
+  trending: {
+    color: "white",
+    marginLeft: "auto"
   },
   title: {
     fontWeight: "800",
@@ -178,24 +184,28 @@ export default function SwipeableTemporaryDrawer() {
       {isAuthenticated ? authLinks : guestLinks}
     </div>
   );
+  const anchor = "bottom";
   return (
     <AppBar position='static' className={classes.display}>
       <Toolbar>
         <IconButton
           className={classes.hamburger}
-          onClick={toggleDrawer("left", true)}>
+          onClick={toggleDrawer(anchor, true)}>
           <DehazeIcon />
         </IconButton>
         <Typography className={classes.grid} variant='h6'>
           Twitter
         </Typography>
         <SwipeableDrawer
-          anchor={"left"}
-          open={state["left"]}
-          onClose={toggleDrawer("left", false)}
-          onOpen={toggleDrawer("left", true)}>
-          {list("left")}
+          anchor={anchor}
+          open={state[anchor]}
+          onClose={toggleDrawer(anchor, false)}
+          onOpen={toggleDrawer(anchor, true)}>
+          {list(anchor)}
         </SwipeableDrawer>
+        <IconButton className={classes.trending} onClick={}>
+          <TrendingUpIcon />
+        </IconButton>
       </Toolbar>
     </AppBar>
   );
