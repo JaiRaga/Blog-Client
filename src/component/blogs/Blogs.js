@@ -1,7 +1,15 @@
 import React, { Fragment } from "react";
-import { Grid, makeStyles, Typography, Divider } from "@material-ui/core";
+import {
+  Grid,
+  makeStyles,
+  Typography,
+  Divider,
+  useMediaQuery
+} from "@material-ui/core";
 import BlogItem from "./BlogItem";
 import TrendingBlogs from "../trending/TrendingBlogs";
+import TrendingSideBar from "../trending/TrendingSideBar";
+import { useTheme } from "@material-ui/styles";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -42,6 +50,8 @@ const useStyles = makeStyles((theme) => ({
 
 const Blogs = () => {
   const classes = useStyles();
+  const theme = useTheme();
+  const trendingSidebar = useMediaQuery(theme.breakpoints.down("xs"));
   return (
     <Grid container className={classes.root} justify='flex-end'>
       <Grid item xs={12} sm={6} className={classes.blogs}>
