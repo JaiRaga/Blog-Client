@@ -5,15 +5,32 @@ import TrendingBlogs from "../trending/TrendingBlogs";
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    flexGrow: 1
+    flexGrow: 1,
+    [theme.breakpoints.down("xs")]: {
+      display: "flex",
+      justifyContent: "center"
+    }
   },
   blogs: {
     padding: 10,
-    marginRight: 10
+    marginRight: 10,
+    [theme.breakpoints.down("xs")]: {
+      margin: 0
+    }
   },
+  blogsTitle: {
+    margin: 10
+  },
+  // blogItem: {
+  //   justifyContent: "center",
+  //   alignItems: "center"
+  // },
   trendings: {
     margin: 5,
-    padding: 5
+    padding: 5,
+    [theme.breakpoints.down("xs")]: {
+      display: "none"
+    }
   },
   trendingTitle: {
     margin: 10
@@ -27,8 +44,11 @@ const Blogs = () => {
   const classes = useStyles();
   return (
     <Grid container className={classes.root} justify='flex-end'>
-      <Grid item xs={6} className={classes.blogs}>
+      <Grid item xs={12} sm={6} className={classes.blogs}>
         <Grid container item justify='center' alignItems='center'>
+          <Typography variant='h4' className={classes.blogsTitle}>
+            Blogs
+          </Typography>
           <Grid item>
             <BlogItem className={classes.blog} />
             <Divider className={classes.divider} />
