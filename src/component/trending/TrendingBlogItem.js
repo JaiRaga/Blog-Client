@@ -1,14 +1,28 @@
 import React from "react";
-import { Grid } from "@material-ui/core";
+import { Grid, Divider, Typography, Button } from "@material-ui/core";
+import BlogItem from "../blogs/BlogItem";
+import { makeStyles } from "@material-ui/styles";
+
+const useStyles = makeStyles({
+  divider: {
+    margin: 5
+  }
+});
 
 const TrendingBlogItem = () => {
+  const classes = useStyles();
   return (
     <Grid item>
-      Lorem ipsum dolor, sit amet consectetur adipisicing elit. Corporis
-      repellat illum officia quo sit omnis nostrum provident. Saepe facere, quia
-      accusantium amet fuga minima. Pariatur ullam laborum maxime adipisci
-      blanditiis iure quam, veniam cumque illum nobis obcaecati maiores,
-      doloremque quis?
+      <BlogItem trending />
+      <Divider className={classes.divider} />
+      <BlogItem trending />
+      <Divider className={classes.divider} />
+      <BlogItem trending />
+      <Divider className={classes.divider} />
+      <BlogItem trending />
+      <Divider className={classes.divider} />
+      <BlogItem trending />
+      <Divider className={classes.divider} />
     </Grid>
   );
 };
