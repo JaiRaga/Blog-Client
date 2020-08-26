@@ -55,7 +55,12 @@ const Blogs = () => {
   return (
     <Grid container className={classes.root} justify='flex-end'>
       <Grid item xs={12} sm={6} className={classes.blogs}>
-        <Grid container item justify='center' alignItems='center'>
+        <Grid
+          container
+          item
+          direction='column'
+          justify='center'
+          alignItems='center'>
           <Typography variant='h4' className={classes.blogsTitle}>
             Blogs
           </Typography>
