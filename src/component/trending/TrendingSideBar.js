@@ -1,11 +1,20 @@
 import React, { Fragment } from "react";
+import {
+  AppBar,
+  Toolbar,
+  Typography,
+  IconButton,
+  Tooltip,
+  Zoom
+} from "@material-ui/core";
+import { useSelector, useDispatch } from "react-redux";
 import { makeStyles } from "@material-ui/core/styles";
 import SwipeableDrawer from "@material-ui/core/SwipeableDrawer";
-import IconButton from "@material-ui/core/IconButton";
-import { AppBar, Toolbar, Typography } from "@material-ui/core";
+import CloseIcon from "@material-ui/icons/Close";
 import DehazeIcon from "@material-ui/icons/Dehaze";
 import { Link, Redirect } from "react-router-dom";
 import TrendingBlogItem from "./TrendingBlogItem";
+import { toggleTrending } from "../../redux/actions/blog";
 
 const useStyles = makeStyles((theme) => ({
   list: {
@@ -46,23 +55,26 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
-export default function TrendingSideBar({ openDrawer }) {
-  console.log(openDrawer);
+export default function TrendingSideBar() {
   const classes = useStyles();
+  const dispatch = useDispatch();
+  const openDrawer = useSelector((state) => state.blog.openTrending);
+  console.log(openDrawer);
   const [state, setState] = React.useState({
-    left: false
+    right: false
   });
 
-  const toggleDrawer = (anchor, openDrawer) => (event) => {
+  const toggleDrawer = (anchor, open) => (event) => {
     if (
       event &&
       event.type === "keydown" &&
       (event.key === "Tab" || event.key === "Shift")
     ) {
+      console.log("No condition");
       return;
     }
-
-    setState({ [anchor]: openDrawer });
+    console.log(open);
+    setState({ [anchor]: open });
   };
 
   const list = (anchor) => (
@@ -71,6 +83,14 @@ export default function TrendingSideBar({ openDrawer }) {
       role='presentation'
       onClick={toggleDrawer(anchor, false)}
       onKeyDown={toggleDrawer(anchor, false)}>
+      <Tooltip title='Close' TransitionComponent={Zoom}>
+        <IconButton
+          aria-label='close'
+          color='secondary'
+          onClick={() => dispatch(toggleTrending(!openDrawer))}>
+          <CloseIcon />
+        </IconButton>
+      </Tooltip>
       <Typography variant='h3' align='center'>
         Trending
       </Typography>
@@ -81,12 +101,16 @@ export default function TrendingSideBar({ openDrawer }) {
   const anchor = "right";
 
   return (
-    <SwipeableDrawer
-      anchor={anchor}
-      open={state[anchor]}
-      onClose={toggleDrawer(anchor, false)}
-      onOpen={toggleDrawer(anchor, true)}>
-      {list(anchor)}
-    </SwipeableDrawer>
+    <Fragment>
+      {/* <Button onClick={toggleDrawer(anchor, openDrawer)}>{anchor}</Button> */}
+
+      <SwipeableDrawer
+        anchor={anchor}
+        open={openDrawer ? toggleDrawer(anchor, openDrawer) : null}
+        onClose={toggleDrawer(anchor, false)}
+        onOpen={toggleDrawer(anchor, true)}>
+        {list(anchor)}
+      </SwipeableDrawer>
+    </Fragment>
   );
 }
