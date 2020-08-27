@@ -1,4 +1,12 @@
-import React, { Fragment } from "react";
+import React, { Fragment, useState } from "react";
+import {
+  AppBar,
+  Toolbar,
+  Typography,
+  Button,
+  Tooltip,
+  Zoom
+} from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import SwipeableDrawer from "@material-ui/core/SwipeableDrawer";
 import IconButton from "@material-ui/core/IconButton";
@@ -7,7 +15,6 @@ import Divider from "@material-ui/core/Divider";
 import ListItem from "@material-ui/core/ListItem";
 import ListItemIcon from "@material-ui/core/ListItemIcon";
 import ListItemText from "@material-ui/core/ListItemText";
-import { AppBar, Toolbar, Typography } from "@material-ui/core";
 import DehazeIcon from "@material-ui/icons/Dehaze";
 import AdjustIcon from "@material-ui/icons/Adjust";
 import TwitterIcon from "@material-ui/icons/Twitter";
@@ -17,15 +24,17 @@ import HomeIcon from "@material-ui/icons/Home";
 import PersonPinIcon from "@material-ui/icons/PersonPin";
 import DirectionsRunIcon from "@material-ui/icons/DirectionsRun";
 import TrendingUpIcon from "@material-ui/icons/TrendingUp";
-import { Link, Redirect } from "react-router-dom";
+import { Link, Redirect, useHistory } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import TrendingSideBar from "../trending/TrendingSideBar";
+import { toggleTrending } from "../../redux/actions/blog";
 
 // import SideProfile from "../profile/SideProfile";
 
 const useStyles = makeStyles((theme) => ({
   list: {
-    width: "auto"
+    width: "auto",
+    padding: 0
   },
   display: {
     [theme.breakpoints.down("md")]: {
@@ -37,12 +46,20 @@ const useStyles = makeStyles((theme) => ({
   },
   grid: {
     paddingBottom: 3,
-    paddingLeft: 20
+    paddingLeft: 20,
+    fontStyle: "italic",
+    fontWeight: 500
   },
   link: {
     textDecoration: "none",
     color: "#1976d2"
   },
+  right: {
+    padding: 0
+  },
+  // btnLink: {
+  //   textDecoration: "none"
+  // },
   icons: {
     color: "#1976d2",
     minWidth: "35px",
@@ -63,10 +80,16 @@ const useStyles = makeStyles((theme) => ({
 
 export default function SwipeableTemporaryDrawer() {
   const classes = useStyles();
+  const dispatch = useDispatch();
+  const history = useHistory();
   const [state, setState] = React.useState({
     left: false
   });
-  const dispatch = useDispatch();
+
+  // For toggling Trending
+  const openTrending = useSelector((state) => state.blog.openTrending);
+  const [isOpen, setIsOpen] = useState(openTrending);
+  console.log(isOpen);
 
   const toggleDrawer = (anchor, open) => (event) => {
     if (
@@ -141,12 +164,28 @@ export default function SwipeableTemporaryDrawer() {
   const guestLinks = (
     <Fragment>
       <List className={classes.list}>
-        <Link to='/dashboard' className={classes.link}>
+        <Tooltip
+          title='Most Viewed Blog'
+          placement='top'
+          TransitionComponent={Zoom}>
+          <Button fullWidth className={classes.link}>
+            Tag
+          </Button>
+        </Tooltip>
+        <Tooltip title='Most Viewed Tag' TransitionComponent={Zoom}>
+          <Button fullWidth className={classes.link}>
+            Tag
+          </Button>
+        </Tooltip>
+      </List>
+      <Divider />
+      <List className={classes.list}>
+        <Link to='/' className={classes.link}>
           <ListItem button>
             <ListItemIcon className={classes.icons}>
               <TwitterIcon />
             </ListItemIcon>
-            <ListItemText primary='Twitter' />
+            <ListItemText primary='Pom' />
           </ListItem>
         </Link>
       </List>
@@ -167,6 +206,15 @@ export default function SwipeableTemporaryDrawer() {
               <PersonAddIcon />
             </ListItemIcon>
             <ListItemText primary='Register' />
+          </ListItem>
+        </Link>
+
+        <Link to='/blogs' className={classes.link}>
+          <ListItem button>
+            <ListItemIcon className={classes.icons}>
+              <PersonAddIcon />
+            </ListItemIcon>
+            <ListItemText primary='Blogs' />
           </ListItem>
         </Link>
       </List>
@@ -194,7 +242,7 @@ export default function SwipeableTemporaryDrawer() {
           <DehazeIcon />
         </IconButton>
         <Typography className={classes.grid} variant='h6'>
-          Twitter
+          Pom
         </Typography>
         <SwipeableDrawer
           anchor={anchor}
@@ -203,7 +251,9 @@ export default function SwipeableTemporaryDrawer() {
           onOpen={toggleDrawer(anchor, true)}>
           {list(anchor)}
         </SwipeableDrawer>
-        <IconButton className={classes.trending} onClick={}>
+        <IconButton
+          className={classes.trending}
+          onClick={() => dispatch(toggleTrending(!isOpen))}>
           <TrendingUpIcon />
         </IconButton>
       </Toolbar>
