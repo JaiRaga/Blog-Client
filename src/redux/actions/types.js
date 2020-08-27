@@ -1,0 +1,2 @@
+export const UPDATE_TRENDING = "UPDATE_TRENDING";
+export const TRENDING_ERROR = "TRENDING_ERROR";
