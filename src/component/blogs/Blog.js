@@ -84,7 +84,7 @@ const Blog = () => {
           </Grid>
         </Grid>
       </Grid>
-      <Grid item className={classes.blogBody}>
+      <Grid item className={classes.blogBody} md={6}>
         <Typography variant='h6'>
           Lorem ipsum dolor sit, amet consectetur adipisicing elit. Adipisci
           exercitationem vel sapiente officiis deleniti fugiat quae, at debitis
