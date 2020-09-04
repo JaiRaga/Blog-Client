@@ -1,4 +1,4 @@
-import React, { Fragment } from "react";
+import React, { Fragment, useEffect } from "react";
 import {
   Grid,
   makeStyles,
@@ -9,7 +9,9 @@ import {
 import BlogItem from "./BlogItem";
 import TrendingBlogs from "../trending/TrendingBlogs";
 import TrendingSideBar from "../trending/TrendingSideBar";
+import { useSelector, useDispatch } from "react-redux";
 import { useTheme } from "@material-ui/styles";
+import { getBlogs } from "../../redux/actions/blog";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -50,8 +52,16 @@ const useStyles = makeStyles((theme) => ({
 
 const Blogs = () => {
   const classes = useStyles();
+  const dispatch = useDispatch();
   const theme = useTheme();
   const trendingSidebar = useMediaQuery(theme.breakpoints.down("xs"));
+  const blog = useSelector((state) => state.blog);
+  const { blogs, loading, trending } = blog;
+  console.log(blogs, loading);
+
+  useEffect(() => {
+    dispatch(getBlogs());
+  }, []);
   return (
     <Grid container className={classes.root} justify='flex-end'>
       <Grid item xs={12} sm={6} className={classes.blogs}>
@@ -65,20 +75,11 @@ const Blogs = () => {
             Blogs
           </Typography>
           <Grid item>
-            <BlogItem className={classes.blog} />
-            <Divider className={classes.divider} />
-            <BlogItem className={classes.blog} />
-            <Divider className={classes.divider} />
-            <BlogItem className={classes.blog} />
-            <Divider className={classes.divider} />
-            <BlogItem className={classes.blog} />
-            <Divider className={classes.divider} />
-            <BlogItem className={classes.blog} />
-            <Divider className={classes.divider} />
-            <BlogItem className={classes.blog} />
-            <Divider className={classes.divider} />
-            <BlogItem className={classes.blog} />
-            <Divider className={classes.divider} />
+            {!loading && blogs.length !== 0 ? (
+              blogs.map((blog) => <BlogItem blog={blog} />)
+            ) : (
+              <Typography variant='h2'>Loading!!!</Typography>
+            )}
           </Grid>
         </Grid>
       </Grid>
@@ -91,7 +92,11 @@ const Blogs = () => {
               className={classes.trendingTitle}>
               Trending
             </Typography>
-            <TrendingBlogs className={classes.trending} />
+            {!loading && trending.length !== 0 ? (
+              <TrendingBlogs className={classes.trending} />
+            ) : (
+              <Typography variant='h4'>No Trending Blogs</Typography>
+            )}
           </Grid>
         </Grid>
       </Grid>
