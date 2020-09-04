@@ -1,2 +1,4 @@
+export const GET_BLOGS = "GET_BLOGS";
 export const UPDATE_TRENDING = "UPDATE_TRENDING";
 export const TRENDING_ERROR = "TRENDING_ERROR";
+export const GET_BLOG_ERROR = "GET_BLOG_ERROR";
