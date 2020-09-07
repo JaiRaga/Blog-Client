@@ -8,6 +8,7 @@ import {
 } from "@material-ui/core";
 
 const useStyles = makeStyles((theme) => ({
+  root: {},
   divider: {
     margin: 5
   }
@@ -20,7 +21,7 @@ const BlogItem = ({ blog, trending }) => {
 
   return (
     <Fragment>
-      <Grid container item justify='center'>
+      <Grid container item justify='center' className={classes.root}>
         <Grid item xs={12} md={mediumScreenTitle}>
           <Typography variant='h4' align='center'>
             {blog.title}
