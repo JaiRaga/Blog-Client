@@ -35,6 +35,10 @@ const useStyles = makeStyles((theme) => ({
   list: {
     display: "flex"
   },
+  appName: {
+    fontStyle: "italic",
+    fontWeight: 500
+  },
   link: {
     textDecoration: "none",
     color: "white"
@@ -57,12 +61,12 @@ const Navbar = () => {
   const authLinks = (
     <Fragment>
       <List className={classes.list}>
-        <Link to='/dashboard' className={classes.link}>
+        <Link to='/' className={classes.link}>
           <ListItem button>
             <ListItemIcon className={classes.icons}>
               <TwitterIcon />
             </ListItemIcon>
-            <ListItemText primary='Twitter' />
+            <ListItemText primary='Pom' />
           </ListItem>
         </Link>
       </List>
@@ -109,12 +113,12 @@ const Navbar = () => {
   const guestLinks = (
     <Fragment>
       <List className={classes.list}>
-        <Link to='/dashboard' className={classes.link}>
+        <Link to='/' className={classes.link}>
           <ListItem button>
             <ListItemIcon className={classes.icons}>
               <TwitterIcon />
             </ListItemIcon>
-            <ListItemText primary='Twitter' />
+            <ListItemText primary='Pom' className={classes.appName} />
           </ListItem>
         </Link>
       </List>
@@ -134,6 +138,24 @@ const Navbar = () => {
               <PersonAddIcon />
             </ListItemIcon>
             <ListItemText primary='Register' />
+          </ListItem>
+        </Link>
+
+        <Link to='/blogs' className={classes.link}>
+          <ListItem button>
+            <ListItemIcon className={classes.icons}>
+              <PersonAddIcon />
+            </ListItemIcon>
+            <ListItemText primary='Blogs' />
+          </ListItem>
+        </Link>
+
+        <Link to='/profile' className={classes.link}>
+          <ListItem button>
+            <ListItemIcon className={classes.icons}>
+              <PersonAddIcon />
+            </ListItemIcon>
+            <ListItemText primary='Profile' />
           </ListItem>
         </Link>
       </List>
