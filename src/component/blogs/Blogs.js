@@ -3,7 +3,7 @@ import {
   Grid,
   makeStyles,
   Typography,
-  Divider,
+  Button,
   useMediaQuery
 } from "@material-ui/core";
 import BlogItem from "./BlogItem";
