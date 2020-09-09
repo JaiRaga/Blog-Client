@@ -3,10 +3,12 @@ import { Grid } from "@material-ui/core";
 import TrendingBlogItem from "./TrendingBlogItem";
 import BlogItem from "../blogs/BlogItem";
 
-const TrendingBlogs = () => {
+const TrendingBlogs = ({ trending }) => {
   return (
     <Grid item>
-      <BlogItem />
+      {trending.map((blog) => (
+        <BlogItem blog={blog} />
+      ))}
     </Grid>
   );
 };
