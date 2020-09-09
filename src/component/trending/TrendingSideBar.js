@@ -13,12 +13,11 @@ import SwipeableDrawer from "@material-ui/core/SwipeableDrawer";
 import CloseIcon from "@material-ui/icons/Close";
 import DehazeIcon from "@material-ui/icons/Dehaze";
 import { Link, Redirect } from "react-router-dom";
-import TrendingBlogItem from "./TrendingBlogItem";
+import TrendingBlogs from "./TrendingBlogs";
 import { toggleTrending } from "../../redux/actions/blog";
 
 const useStyles = makeStyles((theme) => ({
   list: {
-    width: "auto",
     backgroundColor: "white",
     margin: 10
   },
@@ -58,8 +57,11 @@ const useStyles = makeStyles((theme) => ({
 export default function TrendingSideBar() {
   const classes = useStyles();
   const dispatch = useDispatch();
-  const openDrawer = useSelector((state) => state.blog.openTrending);
-  console.log(openDrawer);
+  const { openTrending, trending, loading } = useSelector(
+    (state) => state.blog
+  );
+  console.log(openTrending, trending, loading);
+
   const [state, setState] = React.useState({
     right: false
   });
@@ -87,14 +89,20 @@ export default function TrendingSideBar() {
         <IconButton
           aria-label='close'
           color='secondary'
-          onClick={() => dispatch(toggleTrending(!openDrawer))}>
+          onClick={() => dispatch(toggleTrending(!openTrending))}>
           <CloseIcon />
         </IconButton>
       </Tooltip>
       <Typography variant='h3' align='center'>
         Trending
       </Typography>
-      <TrendingBlogItem />
+      {!loading && trending.length !== 0 ? (
+        <TrendingBlogs trending={trending} />
+      ) : (
+        <Typography variant='h4' align='center'>
+          No Trending Blogs.
+        </Typography>
+      )}
     </div>
   );
 
@@ -106,7 +114,7 @@ export default function TrendingSideBar() {
 
       <SwipeableDrawer
         anchor={anchor}
-        open={openDrawer ? toggleDrawer(anchor, openDrawer) : null}
+        open={openTrending ? toggleDrawer(anchor, openTrending) : null}
         onClose={toggleDrawer(anchor, false)}
         onOpen={toggleDrawer(anchor, true)}>
         {list(anchor)}
