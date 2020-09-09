@@ -1,6 +1,7 @@
 import React from "react";
 import { Grid, Avatar } from "@material-ui/core";
 import { makeStyles } from "@material-ui/styles";
+import pic from "../../img/pic.jpg";
 
 const useStyles = makeStyles((theme) => ({
   // grid: {
@@ -23,15 +24,9 @@ const Profile = () => {
       direction='column'
       justify='center'
       alignItems='center'
-      xs={12}
-      md={4}
       className={classes.grid}>
       <Grid container item justify='space-between' alignItems='center'>
-        <Avatar
-          className={classes.avatar}
-          alt='pic'
-          src='https://images.pexels.com/photos/2280845/pexels-photo-2280845.jpeg?auto=compress&cs=tinysrgb&dpr=3&h=750&w=1260'
-        />
+        <Avatar className={classes.avatar} alt='pic' src={pic} />
         <Grid item className={classes.gridRight}>
           <Grid container item direction='column'>
             <Grid item>Name</Grid>
