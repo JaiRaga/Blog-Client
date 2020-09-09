@@ -15,6 +15,14 @@ const theme = createMuiTheme({
     background: {
       default: "#feceab"
     }
+  },
+  overrides: {
+    MuiDrawer: {
+      paperAnchorRight: {
+        left: 0,
+        right: 0
+      }
+    }
   }
 });
 
