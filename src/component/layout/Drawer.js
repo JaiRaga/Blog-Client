@@ -3,11 +3,12 @@ import {
   AppBar,
   Toolbar,
   Typography,
+  InputBase,
   Button,
   Tooltip,
   Zoom
 } from "@material-ui/core";
-import { makeStyles } from "@material-ui/core/styles";
+import { fade, makeStyles } from "@material-ui/core/styles";
 import SwipeableDrawer from "@material-ui/core/SwipeableDrawer";
 import IconButton from "@material-ui/core/IconButton";
 import List from "@material-ui/core/List";
@@ -24,6 +25,7 @@ import HomeIcon from "@material-ui/icons/Home";
 import PersonPinIcon from "@material-ui/icons/PersonPin";
 import DirectionsRunIcon from "@material-ui/icons/DirectionsRun";
 import TrendingUpIcon from "@material-ui/icons/TrendingUp";
+import SearchIcon from "@material-ui/icons/Search";
 import { Link, Redirect, useHistory } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import TrendingSideBar from "../trending/TrendingSideBar";
@@ -32,6 +34,48 @@ import { toggleTrending } from "../../redux/actions/blog";
 // import SideProfile from "../profile/SideProfile";
 
 const useStyles = makeStyles((theme) => ({
+  root: {
+    flexGrow: 1
+  },
+  // search: {
+  //   position: "relative",
+  //   borderRadius: theme.shape.borderRadius,
+  //   backgroundColor: fade(theme.palette.common.white, 0.15),
+  //   "&:hover": {
+  //     backgroundColor: fade(theme.palette.common.white, 0.25)
+  //   },
+  //   marginLeft: 0,
+  //   width: "100%",
+  //   [theme.breakpoints.up("sm")]: {
+  //     marginLeft: theme.spacing(7),
+  //     width: "auto"
+  //   }
+  // },
+  // searchIcon: {
+  //   padding: theme.spacing(0, 2),
+  //   height: "100%",
+  //   position: "absolute",
+  //   pointerEvents: "none",
+  //   display: "flex",
+  //   alignItems: "center",
+  //   justifyContent: "center"
+  // },
+  // inputRoot: {
+  //   color: "inherit"
+  // },
+  // inputInput: {
+  //   padding: theme.spacing(1, 1, 1, 0),
+  //   // vertical padding + font size from searchIcon
+  //   paddingLeft: `calc(1em + ${theme.spacing(4)}px)`,
+  //   transition: theme.transitions.create("width"),
+  //   width: "100%",
+  //   [theme.breakpoints.up("sm")]: {
+  //     width: "12ch",
+  //     "&:focus": {
+  //       width: "20ch"
+  //     }
+  //   }
+  // },
   list: {
     width: "auto",
     padding: 0
@@ -46,7 +90,7 @@ const useStyles = makeStyles((theme) => ({
   },
   grid: {
     paddingBottom: 3,
-    paddingLeft: 20,
+    paddingLeft: 10,
     fontStyle: "italic",
     fontWeight: 500
   },
@@ -243,29 +287,31 @@ export default function SwipeableTemporaryDrawer() {
   );
   const anchor = "bottom";
   return (
-    <AppBar position='static' className={classes.display}>
-      <Toolbar>
-        <IconButton
-          className={classes.hamburger}
-          onClick={toggleDrawer(anchor, true)}>
-          <DehazeIcon />
-        </IconButton>
-        <Typography className={classes.grid} variant='h6'>
-          Pom
-        </Typography>
-        <SwipeableDrawer
-          anchor={anchor}
-          open={state[anchor]}
-          onClose={toggleDrawer(anchor, false)}
-          onOpen={toggleDrawer(anchor, true)}>
-          {list(anchor)}
-        </SwipeableDrawer>
-        <IconButton
-          className={classes.trending}
-          onClick={() => dispatch(toggleTrending(!isOpen))}>
-          <TrendingUpIcon />
-        </IconButton>
-      </Toolbar>
-    </AppBar>
+    <div className={classes.root}>
+      <AppBar position='static' className={classes.display}>
+        <Toolbar>
+          <IconButton
+            className={classes.hamburger}
+            onClick={toggleDrawer(anchor, true)}>
+            <DehazeIcon />
+          </IconButton>
+          <Typography className={classes.grid} variant='h6'>
+            Pom
+          </Typography>
+          <SwipeableDrawer
+            anchor={anchor}
+            open={state[anchor]}
+            onClose={toggleDrawer(anchor, false)}
+            onOpen={toggleDrawer(anchor, true)}>
+            {list(anchor)}
+          </SwipeableDrawer>
+          <IconButton
+            className={classes.trending}
+            onClick={() => dispatch(toggleTrending(!isOpen))}>
+            <TrendingUpIcon />
+          </IconButton>
+        </Toolbar>
+      </AppBar>
+    </div>
   );
 }
