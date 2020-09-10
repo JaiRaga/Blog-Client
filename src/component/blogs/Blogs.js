@@ -76,7 +76,7 @@ const Blogs = () => {
           </Typography>
           <Grid item>
             {!loading && blogs.length !== 0 ? (
-              blogs.map((blog) => <BlogItem blog={blog} />)
+              blogs.map((blog) => <BlogItem key={blog._id} blog={blog} />)
             ) : (
               <Typography variant='h2'>Loading!!!</Typography>
             )}
