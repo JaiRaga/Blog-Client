@@ -235,6 +235,15 @@ export default function SwipeableTemporaryDrawer() {
       </List>
       <Divider />
       <List className={classes.right}>
+        <Link to='/search' className={classes.link}>
+          <ListItem button>
+            <ListItemIcon className={classes.icons}>
+              <SearchIcon />
+            </ListItemIcon>
+            <ListItemText primary='Search' />
+          </ListItem>
+        </Link>
+
         <Link to='/login' className={classes.link}>
           <ListItem button>
             <ListItemIcon className={classes.icons}>
