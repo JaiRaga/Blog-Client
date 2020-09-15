@@ -10,14 +10,17 @@ import {
 const useStyles = makeStyles((theme) => ({
   root: {},
   divider: {
-    margin: 5
+    margin: "10px 0",
+    background:
+      "linear-gradient(90deg, rgba(16,3,158,1) 0%, rgba(9,73,121,1) 15%, rgba(4,204,245,1) 48%)"
   }
 }));
 
-const BlogItem = ({ blog, trending }) => {
+const BlogItem = ({ blog, trending, divider }) => {
   const classes = useStyles();
   const mediumScreenTitle = trending ? 12 : 4;
   const mediumScreenTags = trending ? 12 : 8;
+  console.log(divider);
 
   return (
     <Fragment>
