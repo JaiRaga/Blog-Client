@@ -11,6 +11,7 @@ import CheckIcon from "@material-ui/icons/Check";
 import VisibilityIcon from "@material-ui/icons/Visibility";
 import { makeStyles } from "@material-ui/styles";
 import Comments from "../comments/Comments";
+import Footer from "../layout/Footer";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -209,6 +210,7 @@ const Blog = () => {
         </Typography>
         <Comments />
       </Grid>
+      <Footer />
     </Grid>
   );
 };
