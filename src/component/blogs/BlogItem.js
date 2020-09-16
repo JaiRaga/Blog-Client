@@ -1,4 +1,5 @@
 import React, { Fragment } from "react";
+import { v4 as uuidv4 } from "uuid";
 import {
   Grid,
   Typography,
@@ -32,7 +33,7 @@ const BlogItem = ({ blog, trending }) => {
         <Grid item xs={12} md={mediumScreenTags}>
           <Grid container item justify='center'>
             {blog.category.map((tag) => (
-              <Button variant='contained' color='primary'>
+              <Button key={uuidv4()} variant='contained' color='primary'>
                 {tag}
               </Button>
             ))}
