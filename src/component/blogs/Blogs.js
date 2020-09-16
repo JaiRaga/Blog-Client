@@ -12,12 +12,13 @@ import TrendingSideBar from "../trending/TrendingSideBar";
 import { useSelector, useDispatch } from "react-redux";
 import { useTheme } from "@material-ui/styles";
 import { getBlogs } from "../../redux/actions/blog";
+import Footer from "../layout/Footer";
 
 const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 1,
+    display: "flex",
     [theme.breakpoints.down("xs")]: {
-      display: "flex",
       justifyContent: "center"
     }
   },
@@ -31,10 +32,6 @@ const useStyles = makeStyles((theme) => ({
   blogsTitle: {
     margin: 10
   },
-  // blogItem: {
-  //   justifyContent: "center",
-  //   alignItems: "center"
-  // },
   trendings: {
     margin: 5,
     padding: 5,
@@ -57,7 +54,7 @@ const Blogs = () => {
   const trendingSidebar = useMediaQuery(theme.breakpoints.down("xs"));
   const blog = useSelector((state) => state.blog);
   const { blogs, loading, trending } = blog;
-  console.log(blogs, loading);
+  // console.log(blogs, loading);
 
   useEffect(() => {
     dispatch(getBlogs());
