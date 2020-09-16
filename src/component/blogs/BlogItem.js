@@ -16,11 +16,10 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
-const BlogItem = ({ blog, trending, divider }) => {
+const BlogItem = ({ blog, trending }) => {
   const classes = useStyles();
   const mediumScreenTitle = trending ? 12 : 4;
   const mediumScreenTags = trending ? 12 : 8;
-  console.log(divider);
 
   return (
     <Fragment>
