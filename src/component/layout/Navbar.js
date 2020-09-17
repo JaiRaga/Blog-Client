@@ -32,45 +32,6 @@ const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 1
   },
-  search: {
-    position: "relative",
-    borderRadius: theme.shape.borderRadius,
-    backgroundColor: fade(theme.palette.common.white, 0.15),
-    "&:hover": {
-      backgroundColor: fade(theme.palette.common.white, 0.25)
-    },
-    marginLeft: 0,
-    width: "100%",
-    [theme.breakpoints.up("sm")]: {
-      marginLeft: theme.spacing(1),
-      width: "auto"
-    }
-  },
-  searchIcon: {
-    padding: theme.spacing(0, 2),
-    height: "100%",
-    position: "absolute",
-    pointerEvents: "none",
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "center"
-  },
-  inputRoot: {
-    color: "inherit"
-  },
-  inputInput: {
-    padding: theme.spacing(1, 1, 1, 0),
-    // vertical padding + font size from searchIcon
-    paddingLeft: `calc(1em + ${theme.spacing(4)}px)`,
-    transition: theme.transitions.create("width"),
-    width: "100%",
-    [theme.breakpoints.up("sm")]: {
-      width: "12ch",
-      "&:focus": {
-        width: "20ch"
-      }
-    }
-  },
   navbar: {
     [theme.breakpoints.down("md")]: {
       display: "none"
@@ -100,6 +61,19 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
+const top100Films = [
+  { title: "Sarvamum Krishana Arpanam", year: 5464 },
+  { title: "The Shawshank Redemption", year: 1994 },
+  { title: "The Godfather", year: 1972 },
+  { title: "The Godfather: Part II", year: 1974 },
+  { title: "The Dark Knight", year: 2008 },
+  { title: "12 Angry Men", year: 1957 },
+  { title: "Schindler's List", year: 1993 },
+  { title: "Pulp Fiction", year: 1994 },
+  { title: "The Lord of the Rings: The Return of the King", year: 2003 },
+  { title: "The Good, the Bad and the Ugly", year: 1966 }
+];
+
 const Navbar = (props) => {
   const classes = useStyles();
   const { isAuthenticated, loading } = useSelector((state) => state.auth);
@@ -116,6 +90,17 @@ const Navbar = (props) => {
             <ListItemText primary='Pom' />
           </ListItem>
         </Link>
+      </List>
+      <List className={classes.right}>
+        <Autocomplete
+          id='search-box'
+          options={top100Films}
+          getOptionLabel={(option) => option.title}
+          style={{ width: 300 }}
+          renderInput={(params) => (
+            <TextField {...params} label='Search Pom' variant='filled' />
+          )}
+        />
       </List>
       <List className={classes.right}>
         <Link to='/dashboard' className={classes.link}>
@@ -157,19 +142,6 @@ const Navbar = (props) => {
     </Fragment>
   );
 
-  const top100Films = [
-    { title: "Sarvamum Krishana Arpanam", year: 5464 },
-    { title: "The Shawshank Redemption", year: 1994 },
-    { title: "The Godfather", year: 1972 },
-    { title: "The Godfather: Part II", year: 1974 },
-    { title: "The Dark Knight", year: 2008 },
-    { title: "12 Angry Men", year: 1957 },
-    { title: "Schindler's List", year: 1993 },
-    { title: "Pulp Fiction", year: 1994 },
-    { title: "The Lord of the Rings: The Return of the King", year: 2003 },
-    { title: "The Good, the Bad and the Ugly", year: 1966 }
-  ];
-
   const guestLinks = (
     <Fragment>
       <List className={classes.list}>
@@ -183,17 +155,6 @@ const Navbar = (props) => {
         </Link>
       </List>
       <List className={classes.right}>
-        {/* <ListItem> */}
-        <Autocomplete
-          id='search-box'
-          options={top100Films}
-          getOptionLabel={(option) => option.title}
-          style={{ width: 300 }}
-          renderInput={(params) => (
-            <TextField {...params} label='Search Pom' variant='outlined' />
-          )}
-        />
-        {/* </ListItem> */}
         <Link to='/login' className={classes.link}>
           <ListItem button>
             <ListItemIcon className={classes.icons}>
@@ -212,7 +173,7 @@ const Navbar = (props) => {
           </ListItem>
         </Link>
 
-        <Link to='/blogs' className={classes.link}>
+        {/* <Link to='/blogs' className={classes.link}>
           <ListItem button>
             <ListItemIcon className={classes.icons}>
               <PersonAddIcon />
@@ -228,7 +189,7 @@ const Navbar = (props) => {
             </ListItemIcon>
             <ListItemText primary='Profile' />
           </ListItem>
-        </Link>
+        </Link> */}
       </List>
     </Fragment>
   );
