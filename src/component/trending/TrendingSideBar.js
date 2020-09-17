@@ -1,18 +1,9 @@
 import React, { Fragment } from "react";
-import {
-  AppBar,
-  Toolbar,
-  Typography,
-  IconButton,
-  Tooltip,
-  Zoom
-} from "@material-ui/core";
+import { Typography, IconButton, Tooltip, Zoom } from "@material-ui/core";
 import { useSelector, useDispatch } from "react-redux";
 import { makeStyles } from "@material-ui/core/styles";
 import SwipeableDrawer from "@material-ui/core/SwipeableDrawer";
 import CloseIcon from "@material-ui/icons/Close";
-import DehazeIcon from "@material-ui/icons/Dehaze";
-import { Link, Redirect } from "react-router-dom";
 import TrendingBlogs from "./TrendingBlogs";
 import { toggleTrending } from "../../redux/actions/blog";
 
@@ -60,7 +51,6 @@ export default function TrendingSideBar() {
   const { openTrending, trending, loading } = useSelector(
     (state) => state.blog
   );
-  console.log(openTrending, trending, loading);
 
   const [state, setState] = React.useState({
     right: false
@@ -110,8 +100,6 @@ export default function TrendingSideBar() {
 
   return (
     <Fragment>
-      {/* <Button onClick={toggleDrawer(anchor, openDrawer)}>{anchor}</Button> */}
-
       <SwipeableDrawer
         anchor={anchor}
         open={openTrending ? toggleDrawer(anchor, openTrending) : null}
