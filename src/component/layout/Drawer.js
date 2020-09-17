@@ -114,7 +114,7 @@ export default function SwipeableTemporaryDrawer() {
       </Typography>
       <Divider />
       <List className={classes.list}>
-        <Link to='/profile' className={classes.link}>
+        <Link to='/' className={classes.link}>
           <ListItem button>
             <ListItemIcon className={classes.icons}>
               <ChangeHistoryIcon />
