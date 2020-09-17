@@ -7,7 +7,7 @@ const TrendingBlogs = ({ trending }) => {
   return (
     <Grid item>
       {trending.map((blog) => (
-        <BlogItem blog={blog} />
+        <BlogItem blog={blog} trending />
       ))}
     </Grid>
   );
