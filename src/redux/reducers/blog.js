@@ -7,6 +7,7 @@ import {
 
 const initialState = {
   blog: null,
+  search: [],
   blogs: [],
   trending: [],
   openTrending: false,
