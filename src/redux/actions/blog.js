@@ -8,7 +8,7 @@ import {
 
 export const getBlogs = () => async (dispatch) => {
   try {
-    const res = await axios.get("/blogs");
+    const res = await axios.get("/api/blogs");
     dispatch({ type: GET_BLOGS, payload: res.data });
   } catch (err) {
     dispatch({ type: GET_BLOG_ERROR });
@@ -17,7 +17,6 @@ export const getBlogs = () => async (dispatch) => {
 
 export const toggleTrending = (open) => async (dispatch) => {
   try {
-    console.log(open);
     dispatch({ type: UPDATE_TRENDING, payload: open });
   } catch (err) {
     dispatch({ type: TRENDING_ERROR });
