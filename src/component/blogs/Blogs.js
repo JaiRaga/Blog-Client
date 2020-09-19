@@ -13,6 +13,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { useTheme } from "@material-ui/styles";
 import { getBlogs } from "../../redux/actions/blog";
 import Footer from "../layout/Footer";
+import { Skeleton } from "@material-ui/lab";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -47,7 +48,7 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
-const Blogs = () => {
+const Blogs = ({ displayTrending }) => {
   const classes = useStyles();
   const dispatch = useDispatch();
   const theme = useTheme();
@@ -61,42 +62,54 @@ const Blogs = () => {
   }, []);
   return (
     <Grid container className={classes.root} justify='flex-end'>
-      <Grid item xs={12} sm={6} className={classes.blogs}>
+      <Grid
+        item
+        xs={12}
+        sm={displayTrending === "false" ? 12 : 6}
+        className={classes.blogs}>
         <Grid
           container
           item
           direction='column'
           justify='center'
           alignItems='center'>
-          <Typography variant='h4' className={classes.blogsTitle}>
-            Blogs
-          </Typography>
-          <Grid item>
-            {!loading && blogs.length !== 0 ? (
-              blogs.map((blog) => <BlogItem key={blog._id} blog={blog} />)
-            ) : (
-              <Typography variant='h2'>Loading!!!</Typography>
-            )}
-          </Grid>
+          {!loading && blogs.length !== 0 ? (
+            <Fragment>
+              <Typography variant='h4' className={classes.blogsTitle}>
+                Blogs
+              </Typography>
+              <Grid item>
+                {blogs.map((blog) => (
+                  <BlogItem key={blog._id} blog={blog} />
+                ))}
+              </Grid>
+            </Fragment>
+          ) : (
+            <Skeleton variant='rect' width='100%'>
+              <div />
+            </Skeleton>
+          )}
         </Grid>
       </Grid>
-      <Grid item xs={3} className={classes.trendings}>
-        <Grid container item>
-          <Grid item>
-            <Typography
-              variant='h4'
-              align='center'
-              className={classes.trendingTitle}>
-              Trending
-            </Typography>
-            {!loading && trending.length !== 0 ? (
-              <TrendingBlogs className={classes.trending} />
-            ) : (
-              <Typography variant='h4'>No Trending Blogs</Typography>
-            )}
+      {displayTrending !== "false" ? (
+        <Grid item xs={3} className={classes.trendings}>
+          <Grid container item>
+            <Grid item>
+              <Typography
+                variant='h4'
+                align='center'
+                className={classes.trendingTitle}>
+                Trending
+              </Typography>
+              {!loading && trending.length !== 0 ? (
+                <TrendingBlogs className={classes.trending} />
+              ) : (
+                <Typography variant='h4'>No Trending Blogs</Typography>
+              )}
+            </Grid>
           </Grid>
         </Grid>
-      </Grid>
+      ) : null}
     </Grid>
   );
 };
