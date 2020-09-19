@@ -11,9 +11,12 @@ import {
 const useStyles = makeStyles((theme) => ({
   root: {},
   divider: {
-    margin: "10px 0",
+    margin: "40px 0",
     background:
       "linear-gradient(90deg, rgba(16,3,158,1) 0%, rgba(9,73,121,1) 15%, rgba(4,204,245,1) 48%)"
+  },
+  title: {
+    padding: "20px 0"
   }
 }));
 
@@ -25,7 +28,7 @@ const BlogItem = ({ blog, trending }) => {
   return (
     <Fragment>
       <Grid container item justify='center' className={classes.root}>
-        <Grid item xs={12} md={mediumScreenTitle}>
+        <Grid item xs={12} md={mediumScreenTitle} className={classes.title}>
           <Typography variant='h4' align='center'>
             {blog.title}
           </Typography>
