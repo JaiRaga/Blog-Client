@@ -58,6 +58,9 @@ const useStyles = makeStyles((theme) => ({
   right: {
     display: "flex",
     marginLeft: "auto"
+  },
+  textFieldColor: {
+    color: "#fff"
   }
 }));
 
