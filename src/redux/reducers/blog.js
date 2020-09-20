@@ -2,7 +2,8 @@ import {
   UPDATE_TRENDING,
   TRENDING_ERROR,
   GET_BLOGS,
-  GET_BLOG_ERROR
+  BLOG_ERROR,
+  POST_BLOG
 } from "../actions/types";
 
 const initialState = {
@@ -25,7 +26,14 @@ export default (state = initialState, action) => {
         loading: false
       };
 
-    case GET_BLOG_ERROR:
+    case POST_BLOG:
+      return {
+        ...state,
+        blogs: [payload, ...state.blogs],
+        loading: false
+      };
+
+    case BLOG_ERROR:
       return {
         ...state,
         errors: { blogsError: true },
